@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Meteology";
+}
+<form style="margin-top: 20px;">
+    <div class="mb-3">
+        <label for="citySelect" class="form-label">City select</label>
+        <!-- City bounded select list produce change event -->
+        <select id="citySelect" class="form-control" data-bind="options: cities, 
+                                                                optionsText: 'name', 
+                                                                optionsValue: 'id', 
+                                                                optionsCaption: 'Choose...',
+                                                                value: selectedCity,
+                                                                event:{ change: selectedCityChanged}"></select>
+    </div>
+    <div class="mb-3" data-bind="visible: selectedCity() > 0">
+        <label for="temperaturesList" class="form-label">Temperature</label>
+        <!-- Temperature data bounded list -->
+        <ul id="temperaturesList" class="list-group" data-bind="foreach: temperatures">
+            <li class="list-group-item">
+                <span data-bind="text: $parent.readableDate(date)"> </span>
+                :
+                <span data-bind="text: min"> </span>
+                —
+                <span data-bind="text: max"> </span>
+            </li>
+        </ul>
+    </div>
+</form>
